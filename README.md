@@ -40,6 +40,9 @@ dsh plugin --profile web add "D:\path\to\DEEPSEEK-HARNESS-Boot-Animation-Male-Ve
 
 装完刷新页面即可看到开机动画；设置页在 **设置 → 开机动画**。
 
+> 如果插件列表里没出现，把 `"dsh-boot-animation-male"` 加到该 profile `package.json` 的 `dsh.profile.bundles`
+> （或直接在 **设置 → 插件** 里启用）。装到别的 profile 时把 `web` 换成对应名字。
+
 > npm 包（`dsh-boot-animation-male`）尚未发布，发布后安装命令会改为
 > `dsh plugin --profile web add dsh-boot-animation-male`，届时才会出现在 DSH 内的「插件市场 / 插件中心」。
 

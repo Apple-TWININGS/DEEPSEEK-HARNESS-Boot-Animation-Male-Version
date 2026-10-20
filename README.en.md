@@ -34,6 +34,9 @@ dsh plugin --profile web add "D:\path\to\DEEPSEEK-HARNESS-Boot-Animation-Male-Ve
 
 Reload the page to see the boot animation. Settings live under **Settings → Boot animation**.
 
+> If the plugin does not show up, append `"dsh-boot-animation-male"` to `dsh.profile.bundles` in the profile's
+> `package.json` (or enable it under **Settings → Plugins**). Replace `web` with your profile name if different.
+
 > The npm package `dsh-boot-animation-male` is not published yet. Once it is, the command becomes
 > `dsh plugin --profile web add dsh-boot-animation-male`, which is also what makes it appear in the in-app plugin store.
 
