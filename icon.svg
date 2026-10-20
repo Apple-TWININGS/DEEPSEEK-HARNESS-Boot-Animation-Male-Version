@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="DeepSeek Harness boot animation">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8fd0ff"/>
+      <stop offset="55%" stop-color="#2f7bff"/>
+      <stop offset="100%" stop-color="#0a1a3a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3c8dff"/>
+      <stop offset="100%" stop-color="#0b2a6b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#060b16"/>
+  <circle cx="32" cy="32" r="26" fill="url(#glow)" opacity="0.45"/>
+  <path d="M8 26c8-10 18-14 28-12 8 1.6 15 7 20 13-7-4-14-6-21-6-10 0-19 2-27 5z" fill="url(#hair)" opacity="0.9"/>
+  <path d="M12 34c7-3 13-4 20-4 7 0 13 1 20 4-6 6-12 9-20 9s-14-3-20-9z" fill="#eaf3ff" opacity="0.92"/>
+  <circle cx="32" cy="34" r="7.5" fill="#2f7bff"/>
+  <circle cx="32" cy="34" r="4" fill="#061428"/>
+  <circle cx="29.4" cy="31.4" r="1.6" fill="#cfe8ff"/>
+  <path d="M10 50h44" stroke="#3c8dff" stroke-opacity="0.35" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="54" cy="50" r="2" fill="#8fd0ff"/>
+</svg>

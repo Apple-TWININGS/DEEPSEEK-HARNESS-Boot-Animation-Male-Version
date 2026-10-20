@@ -1,0 +1,7 @@
+# dsh-boot-animation-male — profile bundle patch layer
+# ====================================================
+# 由 dsh.bundle.patch 声明：装进某个 profile 后，本文件作为该 profile 组合的一层被应用。
+# 行 id 与包名都带插件自身前缀，避免和别的主题 / 背景插件撞名。
+- insert:
+    - id: boot-animation-male
+      name: dsh-boot-animation-male

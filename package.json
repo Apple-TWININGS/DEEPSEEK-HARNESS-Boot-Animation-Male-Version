@@ -1,0 +1,62 @@
+{
+  "name": "dsh-boot-animation-male",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness 开机动画 + 3 张壁纸：进入 Web 界面先播 8.6 秒蓝调开机动画，可选同主题壁纸做页面背景。",
+  "type": "module",
+  "main": "./index.js",
+  "icon": "./icon.svg",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "assets",
+    "locale",
+    "docs",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "boot-animation",
+    "splash",
+    "wallpaper",
+    "background",
+    "appearance",
+    "ui",
+    "cordis",
+    "plugin"
+  ],
+  "license": "MIT",
+  "author": "Apple-TWININGS",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version.git"
+  },
+  "homepage": "https://github.com/Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version#readme",
+  "bugs": {
+    "url": "https://github.com/Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  }
+}
