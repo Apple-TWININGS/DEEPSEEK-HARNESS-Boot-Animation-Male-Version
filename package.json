@@ -1,6 +1,6 @@
 {
   "name": "dsh-boot-animation-male",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DeepSeek Harness 开机动画 + 3 张壁纸：进入 Web 界面先播 8.6 秒蓝调开机动画，可选同主题壁纸做页面背景。",
   "type": "module",
   "main": "./index.js",

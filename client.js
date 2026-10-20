@@ -19,10 +19,12 @@ window.__ModuleLoader__.load({
     const { useCallback, useEffect, useRef, useState } = React
 
     const PKG = 'dsh-boot-animation-male'
-    const VERSION = '1.0.1'
+    const VERSION = '1.0.2'
     const STORAGE_KEY = PKG + ':settings:v1'
     const PLAYED_KEY = PKG + ':played:v1'
     const MEDIA = '/dsh-boot-animation-male/assets/'
+    // 带版本号的媒体 URL：换素材时浏览器不会继续用旧缓存
+    const asset = (file) => MEDIA + file + '?v=' + VERSION
     const REPO = 'https://github.com/Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version'
 
     const WALLPAPERS = [
@@ -36,6 +38,7 @@ window.__ModuleLoader__.load({
       replay: true,      // 每次打开 / 刷新页面都播（关掉才用「每标签页一次」）
       muted: true,       // 默认静音（浏览器自动播放策略）
       wallpaper: 'awake',
+      motion: 'static',  // 壁纸动效：static | kenburns | video
       dim: 32,           // 壁纸遮罩 0–85，保证浅色 / 深色主题下文字可读
     }
 
@@ -59,6 +62,11 @@ window.__ModuleLoader__.load({
         wpNoneNote: '保持默认界面',
         dim: '背景遮罩',
         dimNote: '在壁纸和界面之间加一层主题底色，数值越高越不抢字。',
+        motion: '壁纸动效',
+        motionStatic: '静态',
+        motionKen: '缓慢缩放',
+        motionVideo: '视频循环',
+        motionNote: '缓慢缩放会慢慢推近画面，并每 26 秒在三张壁纸间淡入淡出轮播；视频循环用同一段 MP4，结尾用双视频交叉淡入淡出。系统「减少动态效果」时自动退回静态，视频模式更耗电。',
         reset: '恢复默认',
         version: '版本',
         repo: 'GitHub 仓库',
@@ -83,6 +91,11 @@ window.__ModuleLoader__.load({
         wpNoneNote: 'Keep the default UI',
         dim: 'Background veil',
         dimNote: 'Adds the theme base colour between wallpaper and UI; higher is easier to read.',
+        motion: 'Wallpaper motion',
+        motionStatic: 'Static',
+        motionKen: 'Slow zoom',
+        motionVideo: 'Video loop',
+        motionNote: 'Slow zoom pushes in gently and cross-fades between the three wallpapers every 26s; video loop replays the same MP4 with a dual-video cross-fade. Falls back to static under prefers-reduced-motion; video decoding costs more battery.',
         reset: 'Restore defaults',
         version: 'Version',
         repo: 'GitHub repository',
@@ -111,6 +124,7 @@ window.__ModuleLoader__.load({
         if (typeof raw.replay === 'boolean') next.replay = raw.replay
         if (typeof raw.muted === 'boolean') next.muted = raw.muted
         if (typeof raw.wallpaper === 'string' && (raw.wallpaper === 'none' || WALLPAPERS.some((w) => w.id === raw.wallpaper))) next.wallpaper = raw.wallpaper
+        if (raw.motion === 'static' || raw.motion === 'kenburns' || raw.motion === 'video') next.motion = raw.motion
         if (typeof raw.dim === 'number' && Number.isFinite(raw.dim)) next.dim = Math.min(85, Math.max(0, Math.round(raw.dim)))
       }
       cached = next
@@ -144,10 +158,20 @@ window.__ModuleLoader__.load({
     // ---------------- 样式 ----------------
     const CSS = [
       // 壁纸层：固定在最底下，不参与任何点击
-      '#dbm-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:#070b14;opacity:0;transition:opacity .5s ease}',
+      '#dbm-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;overflow:hidden;background:#070b14;opacity:0;transition:opacity .5s ease}',
       '#dbm-bg.dbm-on{opacity:1}',
-      '#dbm-bg .dbm-bg-img{position:absolute;inset:0;background-position:center center;background-size:cover;background-repeat:no-repeat}',
+      '#dbm-bg .dbm-bg-img{position:absolute;inset:0;background-position:center center;background-size:cover;background-repeat:no-repeat;opacity:0;transition:opacity 1.1s ease}',
+      '#dbm-bg .dbm-bg-img.dbm-show{opacity:1}',
+      '#dbm-bg .dbm-bg-img.dbm-ken{animation:dbm-ken 32s ease-in-out infinite alternate}',
+      '@keyframes dbm-ken{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(-1.4%,-1%,0)}}',
+      '#dbm-bg .dbm-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease;transform:scale(1.05)}',
       '#dbm-bg .dbm-bg-veil{position:absolute;inset:0;background:var(--dsw-alias-bg-base);opacity:.32;transition:opacity .25s ease}',
+      // 分段按钮（壁纸动效）
+      '.dbm-motion{display:flex;flex-direction:column;gap:10px}',
+      '.dbm-chips{display:flex;gap:6px;flex-wrap:wrap}',
+      '.dbm-chip{padding:5px 11px;border-radius:999px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:12px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease}',
+      '.dbm-chip:hover{background:var(--dsw-alias-interactive-bg-hover)}',
+      '.dbm-chip.dbm-on{border-color:var(--dsw-alias-brand-primary);color:var(--dsw-alias-label-primary);box-shadow:inset 0 0 0 1px var(--dsw-alias-brand-primary)}',
       // 设置页
       '.dbm-page{display:flex;flex-direction:column;gap:18px;padding:2px 2px 28px;font-size:13px;line-height:1.5;color:var(--dsw-alias-label-primary)}',
       '.dbm-head h2{margin:0 0 6px;font-size:16px;font-weight:600;letter-spacing:.01em}',
@@ -182,7 +206,7 @@ window.__ModuleLoader__.load({
       // 开机动画浮层
       '.dbm-boot{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#04070d;cursor:pointer;opacity:1;transition:opacity .45s ease}',
       '.dbm-boot.dbm-closing{opacity:0}',
-      '.dbm-boot video{display:block;width:100%;height:100%;object-fit:cover;background:#04070d}',
+      '.dbm-boot video{display:block;width:100%;height:100%;object-fit:cover;background:#04070d;transform:scale(1.05)}',
       '.dbm-boot-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,rgba(4,7,13,0) 52%,rgba(4,7,13,.55) 100%)}',
       '.dbm-boot-hud{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:20px 24px;pointer-events:none}',
       '.dbm-boot-brand{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.36em;color:rgba(190,220,255,.72)}',
@@ -203,32 +227,144 @@ window.__ModuleLoader__.load({
         const wrap = document.createElement('div')
         wrap.id = 'dbm-bg'
         wrap.setAttribute('aria-hidden', 'true')
-        const img = document.createElement('div')
-        img.className = 'dbm-bg-img'
+        const layerA = document.createElement('div')
+        layerA.className = 'dbm-bg-img'
+        const layerB = document.createElement('div')
+        layerB.className = 'dbm-bg-img'
         const veil = document.createElement('div')
         veil.className = 'dbm-bg-veil'
-        wrap.appendChild(img)
+        wrap.appendChild(layerA)
+        wrap.appendChild(layerB)
         wrap.appendChild(veil)
 
-        const paint = () => {
-          const s = readSettings()
-          const wp = WALLPAPERS.find((w) => w.id === s.wallpaper)
-          if (wp) {
-            img.style.backgroundImage = 'url("' + MEDIA + wp.file + '")'
-            wrap.classList.add('dbm-on')
-          } else {
-            img.style.backgroundImage = ''
-            wrap.classList.remove('dbm-on')
+        const reducedMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+        let teardownMotion = () => {}
+        let lastKey = ''
+        let offSettings = () => {}
+        let mql = null
+        let onMql = null
+
+        // 图片层：静态只显示一张；缓慢缩放时两张交替淡入淡出，并持续推近画面
+        function startImages(ken, startIndex) {
+          const layers = [layerA, layerB]
+          const url = (i) => 'url("' + asset(WALLPAPERS[i].file) + '")'
+          let active = 0
+          let index = startIndex
+          layers[0].style.backgroundImage = url(index)
+          layers[0].classList.toggle('dbm-ken', ken)
+          layers[0].classList.add('dbm-show')
+          let timer = 0
+          if (ken) {
+            timer = window.setInterval(() => {
+              const next = 1 - active
+              index = (index + 1) % WALLPAPERS.length
+              layers[next].style.backgroundImage = url(index)
+              layers[next].classList.remove('dbm-ken')
+              void layers[next].offsetWidth // 重触发 keyframes
+              layers[next].classList.add('dbm-ken')
+              layers[next].classList.add('dbm-show')
+              layers[active].classList.remove('dbm-show')
+              active = next
+            }, 26000)
           }
-          veil.style.opacity = String(s.dim / 100)
+          return () => { window.clearInterval(timer); timer = 0 }
         }
 
-        let off = () => {}
+        // 视频层：两个 video 交替，结尾 0.75 秒交叉淡入淡出，避免硬切
+        function startVideo() {
+          const vids = [document.createElement('video'), document.createElement('video')]
+          const safePlay = (v) => {
+            const attempt = v.play()
+            if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {})
+          }
+          vids.forEach((v) => {
+            v.className = 'dbm-bg-video'
+            v.muted = true
+            v.playsInline = true
+            v.preload = 'auto'
+            v.src = asset('boot.mp4')
+            wrap.appendChild(v)
+          })
+          let active = 0
+          let pending = false
+          let swapTimer = 0
+          const onTime = (event) => {
+            const v = event.target
+            if (v !== vids[active] || pending) return
+            const duration = Number(v.duration)
+            if (!Number.isFinite(duration) || duration <= 0) return
+            if (duration - v.currentTime > 0.75) return
+            pending = true
+            const next = vids[1 - active]
+            try { next.currentTime = 0 } catch { /* 元数据未就绪 */ }
+            safePlay(next)
+            next.style.opacity = '1'
+            v.style.opacity = '0'
+            swapTimer = window.setTimeout(() => {
+              try { v.pause(); v.currentTime = 0 } catch { /* 忽略 */ }
+              active = 1 - active
+              pending = false
+            }, 720)
+          }
+          vids.forEach((v) => {
+            v.addEventListener('timeupdate', onTime)
+            v.addEventListener('loadeddata', () => {
+              if (v === vids[active]) { v.style.opacity = '1'; safePlay(v) }
+            })
+          })
+          vids[0].style.opacity = '1'
+          safePlay(vids[0])
+          const onVisibility = () => {
+            if (document.hidden) vids.forEach((v) => { try { v.pause() } catch { /* 忽略 */ } })
+            else safePlay(vids[active])
+          }
+          document.addEventListener('visibilitychange', onVisibility)
+          return () => {
+            window.clearTimeout(swapTimer)
+            document.removeEventListener('visibilitychange', onVisibility)
+            vids.forEach((v) => {
+              v.removeEventListener('timeupdate', onTime)
+              try { v.pause(); v.removeAttribute('src'); v.load() } catch { /* 忽略 */ }
+              v.remove()
+            })
+          }
+        }
+
+        function paint() {
+          const s = readSettings()
+          const motion = reducedMotion() ? 'static' : s.motion
+          veil.style.opacity = String(s.dim / 100)
+          const key = motion + '|' + s.wallpaper
+          if (key === lastKey) return
+          lastKey = key
+          teardownMotion()
+          teardownMotion = () => {}
+          ;[layerA, layerB].forEach((el) => {
+            el.classList.remove('dbm-show', 'dbm-ken')
+            el.style.backgroundImage = ''
+          })
+          wrap.classList.remove('dbm-on')
+          if (motion === 'video') {
+            wrap.classList.add('dbm-on')
+            teardownMotion = startVideo()
+            return
+          }
+          const index = WALLPAPERS.findIndex((w) => w.id === s.wallpaper)
+          if (index < 0) return
+          wrap.classList.add('dbm-on')
+          teardownMotion = startImages(motion === 'kenburns', index)
+        }
+
         const mount = () => {
           if (!document.getElementById('dbm-style')) document.head.appendChild(style)
           if (!document.getElementById('dbm-bg')) document.body.appendChild(wrap)
           paint()
-          off = subscribeSettings(paint)
+          offSettings = subscribeSettings(paint)
+          if (window.matchMedia) {
+            mql = window.matchMedia('(prefers-reduced-motion: reduce)')
+            onMql = () => paint()
+            if (mql.addEventListener) mql.addEventListener('change', onMql)
+          }
         }
         const onReady = () => { try { mount() } catch { /* 宿主结构异常时静默 */ } }
         if (document.body) onReady()
@@ -236,7 +372,9 @@ window.__ModuleLoader__.load({
 
         return () => {
           document.removeEventListener('DOMContentLoaded', onReady)
-          off()
+          if (mql && onMql && mql.removeEventListener) mql.removeEventListener('change', onMql)
+          offSettings()
+          teardownMotion()
           wrap.remove()
           style.remove()
         }
@@ -338,7 +476,7 @@ window.__ModuleLoader__.load({
       },
         h('video', {
           ref: videoRef,
-          src: MEDIA + 'boot.mp4',
+          src: asset('boot.mp4'),
           preload: 'auto',
           autoPlay: true,
           muted: muted,
@@ -388,7 +526,7 @@ window.__ModuleLoader__.load({
         title: (localeKey() === 'zh' ? wp.zhNote : wp.enNote),
         onClick: () => update({ wallpaper: wp.id }),
       },
-        h('img', { src: MEDIA + wp.thumb, alt: '', loading: 'lazy', draggable: false }),
+        h('img', { src: asset(wp.thumb), alt: '', loading: 'lazy', draggable: false }),
         h('span', { className: 'dbm-thumb-cap' }, localeKey() === 'zh' ? wp.zh : wp.en),
       )
 
@@ -428,6 +566,22 @@ window.__ModuleLoader__.load({
         h('section', { className: 'dbm-card' },
           h('h3', null, t('wpSection')),
           h('div', { className: 'dbm-grid' }, noneCard, WALLPAPERS.map(thumb)),
+          h('div', { className: 'dbm-motion' },
+            h('div', { className: 'dbm-row-label' },
+              h('b', null, t('motion')),
+              h('span', null, t('motionNote')),
+            ),
+            h('div', { className: 'dbm-chips' },
+              [['static', 'motionStatic'], ['kenburns', 'motionKen'], ['video', 'motionVideo']].map(([value, label]) =>
+                h('button', {
+                  key: value,
+                  type: 'button',
+                  className: 'dbm-chip' + (state.motion === value ? ' dbm-on' : ''),
+                  onClick: () => update({ motion: value }),
+                }, t(label)),
+              ),
+            ),
+          ),
           h('div', { className: 'dbm-slider' },
             h('span', { style: { fontSize: '12px', color: 'var(--dsw-alias-label-secondary)' } }, t('dim')),
             h('input', {

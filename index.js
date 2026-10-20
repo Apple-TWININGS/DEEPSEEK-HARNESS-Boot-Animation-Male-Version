@@ -67,7 +67,7 @@ function serve(req, res) {
   }
 
   if (urlPath === ROUTE + '/health') {
-    sendJson(res, 200, { ok: true, plugin: 'dsh-boot-animation-male', version: '1.0.1' })
+    sendJson(res, 200, { ok: true, plugin: 'dsh-boot-animation-male', version: '1.0.2' })
     return
   }
 

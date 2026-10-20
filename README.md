@@ -9,7 +9,7 @@
 一个纯本地、不联网的 DSH Web 插件：把 `dsh-boot-clips` 里的 MP4 做成开机动画，并附带三张同主题壁纸。
 宿主半（Node）只负责把包内媒体用同源路由发出去；浏览器半负责浮层播放、壁纸层和设置页。
 
-![开机动画](docs/screenshots/1.0.1/boot.jpg)
+![开机动画](docs/screenshots/1.0.2/boot.jpg)
 
 ## 它做了什么
 
@@ -17,12 +17,16 @@
   - 点击画面、按 `ESC` 或回车即可跳过；
   - 系统开启「减少动态效果」时自动跳过；
   - 默认每次打开 / 刷新页面都播放，设置里可改成「每个标签页只播一次」。
-- **三张壁纸**：`觉醒` / `凝视` / `静默`，从同一段动画的定格帧里出，色调和动画一致。
+- **三张壁纸**：`觉醒` / `凝视` / `静默`，从同一段动画的定格帧里出，色调和动画一致；打包时已裁掉录制画面两侧的显示器边框。
+- **壁纸动效**：`静态` / `缓慢缩放` / `视频循环` 三档。
+  - 缓慢缩放：画面缓慢推近，并每 26 秒在三张壁纸之间淡入淡出轮播；
+  - 视频循环：用同一段 MP4 做背景，结尾用两个 `<video>` 交叉淡入淡出，不会硬切；
+  - 系统开启「减少动态效果」时自动退回静态，视频模式更耗电。
 - **背景遮罩**：0–85% 可调，遮罩取当前主题的底色，深色 / 浅色主题下都不抢字。
 - **全部本地**：偏好存在 `localStorage`，不上传、不联网、不读取用户目录。
 
-![壁纸](docs/screenshots/1.0.1/wallpaper.jpg)
-![设置页](docs/screenshots/1.0.1/settings.jpg)
+![壁纸](docs/screenshots/1.0.2/wallpaper.jpg)
+![设置页](docs/screenshots/1.0.2/settings.jpg)
 
 ## 安装
 
@@ -57,6 +61,7 @@ dsh plugin --profile web add "D:\path\to\DEEPSEEK-HARNESS-Boot-Animation-Male-Ve
 | 播放声音 | 关 | 动画本身没有音轨，开启只是让浏览器尝试非静音自动播放 |
 | 重新播放 | — | 立刻重播一次，方便预览 |
 | 壁纸 | 觉醒 | 可选「不使用」保持原界面 |
+| 壁纸动效 | 静态 | 静态 / 缓慢缩放 / 视频循环 |
 | 背景遮罩 | 32% | 壁纸与界面之间的主题底色浓度 |
 
 设置写在 `localStorage` 的两个键里，手动清理即可恢复默认：
@@ -92,6 +97,7 @@ dsh plugin --profile web remove dsh-boot-animation-male
 
 - 动画与三张壁纸由 **Apple-TWININGS** 制作，随本仓库以 MIT 许可发布；原始剪辑留在 `dsh-boot-clips/`（不入包）。
 - `静默` 取自动画收尾的闭目帧；`觉醒`、`凝视` 取自睁眼定格帧。
+- 源素材是屏幕录制，左右有显示器边框 / 反光：打包的壁纸已裁掉左右边框，开机动画用 1.05 倍裁边把左边那条遮住。
 
 ## 目录结构
 
@@ -107,7 +113,7 @@ dsh plugin --profile web remove dsh-boot-animation-male
 │   ├── boot.mp4          # 8.6s 开机动画
 │   ├── wallpapers/*.jpg  # 1920×1080 壁纸
 │   └── thumbs/*.jpg      # 设置页缩略图 480×270
-└── docs/screenshots/1.0.1/  # README 截图（收起侧边栏）
+└── docs/screenshots/1.0.2/  # README 截图（收起侧边栏）
 ```
 
 ## English
