@@ -9,20 +9,20 @@
 一个纯本地、不联网的 DSH Web 插件：把 `dsh-boot-clips` 里的 MP4 做成开机动画，并附带三张同主题壁纸。
 宿主半（Node）只负责把包内媒体用同源路由发出去；浏览器半负责浮层播放、壁纸层和设置页。
 
-![开机动画](docs/screenshots/collapsed/boot.jpg)
+![开机动画](docs/screenshots/1.0.1/boot.jpg)
 
 ## 它做了什么
 
 - **开机动画**：打开页面时整帧播放 8.6 秒 1080p 的蓝调开机动画，播完自动淡出。
   - 点击画面、按 `ESC` 或回车即可跳过；
   - 系统开启「减少动态效果」时自动跳过；
-  - 默认每个标签页只在首次加载播放一次，设置里可改成「每次刷新都播放」。
+  - 默认每次打开 / 刷新页面都播放，设置里可改成「每个标签页只播一次」。
 - **三张壁纸**：`觉醒` / `凝视` / `静默`，从同一段动画的定格帧里出，色调和动画一致。
 - **背景遮罩**：0–85% 可调，遮罩取当前主题的底色，深色 / 浅色主题下都不抢字。
 - **全部本地**：偏好存在 `localStorage`，不上传、不联网、不读取用户目录。
 
-![壁纸](docs/screenshots/collapsed/wallpaper.jpg)
-![设置页](docs/screenshots/collapsed/settings.jpg)
+![壁纸](docs/screenshots/1.0.1/wallpaper.jpg)
+![设置页](docs/screenshots/1.0.1/settings.jpg)
 
 ## 安装
 
@@ -53,7 +53,7 @@ dsh plugin --profile web add "D:\path\to\DEEPSEEK-HARNESS-Boot-Animation-Male-Ve
 | 选项 | 默认 | 说明 |
 | --- | --- | --- |
 | 启用开机动画 | 开 | 关掉后刷新不再播放 |
-| 每次刷新都播放 | 关 | 关时每个标签页只在首次加载播放一次 |
+| 每次刷新都播放 | 开 | 关时每个标签页只在首次加载播放一次 |
 | 播放声音 | 关 | 动画本身没有音轨，开启只是让浏览器尝试非静音自动播放 |
 | 重新播放 | — | 立刻重播一次，方便预览 |
 | 壁纸 | 觉醒 | 可选「不使用」保持原界面 |
@@ -107,7 +107,7 @@ dsh plugin --profile web remove dsh-boot-animation-male
 │   ├── boot.mp4          # 8.6s 开机动画
 │   ├── wallpapers/*.jpg  # 1920×1080 壁纸
 │   └── thumbs/*.jpg      # 设置页缩略图 480×270
-└── docs/screenshots/collapsed/  # README 截图（收起侧边栏）
+└── docs/screenshots/1.0.1/  # README 截图（收起侧边栏）
 ```
 
 ## English

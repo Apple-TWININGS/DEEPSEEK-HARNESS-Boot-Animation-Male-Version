@@ -19,7 +19,7 @@ window.__ModuleLoader__.load({
     const { useCallback, useEffect, useRef, useState } = React
 
     const PKG = 'dsh-boot-animation-male'
-    const VERSION = '1.0.0'
+    const VERSION = '1.0.1'
     const STORAGE_KEY = PKG + ':settings:v1'
     const PLAYED_KEY = PKG + ':played:v1'
     const MEDIA = '/dsh-boot-animation-male/assets/'
@@ -33,7 +33,7 @@ window.__ModuleLoader__.load({
 
     const DEFAULTS = {
       boot: true,        // 开机动画总开关
-      replay: false,     // 每次刷新都播（false = 每个标签页只播一次）
+      replay: true,      // 每次打开 / 刷新页面都播（关掉才用「每标签页一次」）
       muted: true,       // 默认静音（浏览器自动播放策略）
       wallpaper: 'awake',
       dim: 32,           // 壁纸遮罩 0–85，保证浅色 / 深色主题下文字可读

@@ -6,19 +6,19 @@
 
 A fully local DeepSeek Harness Web plugin. The Host half serves the bundled media over one same-origin route; the Client half plays the full-frame overlay, paints the wallpaper layer at `z-index:-1`, and adds a settings page. No network access, no user-file reads, no host config writes.
 
-![Boot animation](docs/screenshots/collapsed/boot.jpg)
+![Boot animation](docs/screenshots/1.0.1/boot.jpg)
 
 ## Features
 
 - **Boot animation** — full-frame 8.6s 1080p clip on load, fades out when it ends.
   - Skip with a click, `ESC` or `Enter`; automatically skipped under `prefers-reduced-motion`.
-  - Plays once per tab by default; a setting makes it play on every reload.
+  - Plays on every page load by default; a setting can limit it to once per tab.
 - **Three wallpapers** — `Awake` / `Gaze` / `Silent`, frame-stills from the same animation.
 - **Background veil** — 0–85%, tinted with the current theme base colour so text stays readable in light and dark themes.
 - **No telemetry** — preferences live in `localStorage`.
 
-![Wallpaper](docs/screenshots/collapsed/wallpaper.jpg)
-![Settings](docs/screenshots/collapsed/settings.jpg)
+![Wallpaper](docs/screenshots/1.0.1/wallpaper.jpg)
+![Settings](docs/screenshots/1.0.1/settings.jpg)
 
 ## Install
 
@@ -45,7 +45,7 @@ Reload the page to see the boot animation. Settings live under **Settings → Bo
 | Option | Default | Notes |
 | --- | --- | --- |
 | Enable boot animation | on | Off: no overlay on load |
-| Play on every reload | off | Off: first load of each tab only |
+| Play on every reload | on | Off: first load of each tab only |
 | Play with sound | off | The clip has no audio track |
 | Play again | — | Replay immediately |
 | Wallpaper | Awake | `None` keeps the default UI |
