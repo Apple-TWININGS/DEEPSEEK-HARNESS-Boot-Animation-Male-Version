@@ -6,7 +6,7 @@
 
 A fully local DeepSeek Harness Web plugin. The Host half serves the bundled media over one same-origin route; the Client half plays the full-frame overlay, paints the wallpaper layer at `z-index:-1`, and adds a settings page. No network access, no user-file reads, no host config writes.
 
-![Boot animation](docs/screenshots/boot.jpg)
+![Boot animation](docs/screenshots/collapsed/boot.jpg)
 
 ## Features
 
@@ -17,8 +17,8 @@ A fully local DeepSeek Harness Web plugin. The Host half serves the bundled medi
 - **Background veil** — 0–85%, tinted with the current theme base colour so text stays readable in light and dark themes.
 - **No telemetry** — preferences live in `localStorage`.
 
-![Wallpaper](docs/screenshots/wallpaper.jpg)
-![Settings](docs/screenshots/settings.jpg)
+![Wallpaper](docs/screenshots/collapsed/wallpaper.jpg)
+![Settings](docs/screenshots/collapsed/settings.jpg)
 
 ## Install
 

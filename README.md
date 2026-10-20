@@ -9,7 +9,7 @@
 一个纯本地、不联网的 DSH Web 插件：把 `dsh-boot-clips` 里的 MP4 做成开机动画，并附带三张同主题壁纸。
 宿主半（Node）只负责把包内媒体用同源路由发出去；浏览器半负责浮层播放、壁纸层和设置页。
 
-![开机动画](docs/screenshots/boot.jpg)
+![开机动画](docs/screenshots/collapsed/boot.jpg)
 
 ## 它做了什么
 
@@ -21,8 +21,8 @@
 - **背景遮罩**：0–85% 可调，遮罩取当前主题的底色，深色 / 浅色主题下都不抢字。
 - **全部本地**：偏好存在 `localStorage`，不上传、不联网、不读取用户目录。
 
-![壁纸](docs/screenshots/wallpaper.jpg)
-![设置页](docs/screenshots/settings.jpg)
+![壁纸](docs/screenshots/collapsed/wallpaper.jpg)
+![设置页](docs/screenshots/collapsed/settings.jpg)
 
 ## 安装
 
@@ -107,7 +107,7 @@ dsh plugin --profile web remove dsh-boot-animation-male
 │   ├── boot.mp4          # 8.6s 开机动画
 │   ├── wallpapers/*.jpg  # 1920×1080 壁纸
 │   └── thumbs/*.jpg      # 设置页缩略图 480×270
-└── docs/screenshots/     # README 截图
+└── docs/screenshots/collapsed/  # README 截图（收起侧边栏）
 ```
 
 ## English
