@@ -1,5 +1,6 @@
 # DSH Boot Animation & Wallpapers (Male Version)
 
+[![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/apple-twinings/deepseek-harness-boot-animation-male-version)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f7bff.svg)](LICENSE)
 
 > **One line: install it, open DeepSeek Harness, watch an 8.6s DeepSeek-blue boot animation (skippable), then keep one of three matching wallpapers behind the UI.**

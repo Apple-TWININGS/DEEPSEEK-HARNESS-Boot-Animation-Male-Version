@@ -1,6 +1,6 @@
 # DSH 开机动画 · 壁纸（男版）
 
-[![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version)
+[![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/apple-twinings/deepseek-harness-boot-animation-male-version)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f7bff.svg)](LICENSE)
 [![DSH](https://img.shields.io/badge/DeepSeek%20Harness-0.2.0--rc.2-2f7bff.svg)](https://github.com/deepseek-ai/deepseek-harness)
 
