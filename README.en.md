@@ -1,6 +1,7 @@
 # DSH Boot Animation & Wallpapers (Male Version)
 
 [![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/apple-twinings/deepseek-harness-boot-animation-male-version)
+[![npm](https://img.shields.io/npm/v/dsh-boot-animation-male.svg)](https://www.npmjs.com/package/dsh-boot-animation-male)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f7bff.svg)](LICENSE)
 
 > **One line: install it, open DeepSeek Harness, watch an 8.6s DeepSeek-blue boot animation (skippable), then keep one of three matching wallpapers behind the UI.**
@@ -27,6 +28,14 @@ A fully local DeepSeek Harness Web plugin. The Host half serves the bundled medi
 
 ## Install
 
+From npm (recommended; this is also what the in-app plugin store installs):
+
+```bash
+dsh plugin --profile web add dsh-boot-animation-male
+```
+
+Or from the GitHub source:
+
 ```bash
 dsh plugin --profile web add github:Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version
 ```
@@ -38,6 +47,8 @@ dsh plugin --profile web add "D:\path\to\DEEPSEEK-HARNESS-Boot-Animation-Male-Ve
 ```
 
 Reload the page to see the boot animation. Settings live under **Settings → Boot animation**.
+
+> npm package: [`dsh-boot-animation-male`](https://www.npmjs.com/package/dsh-boot-animation-male) (currently 1.0.2).
 
 > If the plugin does not show up, append `"dsh-boot-animation-male"` to `dsh.profile.bundles` in the profile's
 > `package.json` (or enable it under **Settings → Plugins**). Replace `web` with your profile name if different.

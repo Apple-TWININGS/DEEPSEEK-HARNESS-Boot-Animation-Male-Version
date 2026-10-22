@@ -1,6 +1,7 @@
 # DSH 开机动画 · 壁纸（男版）
 
 [![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/apple-twinings/deepseek-harness-boot-animation-male-version)
+[![npm](https://img.shields.io/npm/v/dsh-boot-animation-male.svg)](https://www.npmjs.com/package/dsh-boot-animation-male)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f7bff.svg)](LICENSE)
 [![DSH](https://img.shields.io/badge/DeepSeek%20Harness-0.2.0--rc.2-2f7bff.svg)](https://github.com/deepseek-ai/deepseek-harness)
 
@@ -30,7 +31,13 @@
 
 ## 安装
 
-当前推荐从 GitHub 源码安装（`dsh` 需在 PATH 里）：
+从 npm 安装（推荐；DSH 内「插件中心」一键装的也是这个）：
+
+```bash
+dsh plugin --profile web add dsh-boot-animation-male
+```
+
+也可以从 GitHub 源码装：
 
 ```bash
 dsh plugin --profile web add github:Apple-TWININGS/DEEPSEEK-HARNESS-Boot-Animation-Male-Version
@@ -47,8 +54,7 @@ dsh plugin --profile web add "D:\path\to\DEEPSEEK-HARNESS-Boot-Animation-Male-Ve
 > 如果插件列表里没出现，把 `"dsh-boot-animation-male"` 加到该 profile `package.json` 的 `dsh.profile.bundles`
 > （或直接在 **设置 → 插件** 里启用）。装到别的 profile 时把 `web` 换成对应名字。
 
-> npm 包（`dsh-boot-animation-male`）尚未发布，发布后安装命令会改为
-> `dsh plugin --profile web add dsh-boot-animation-male`，届时才会出现在 DSH 内的「插件市场 / 插件中心」。
+> npm 包：[`dsh-boot-animation-male`](https://www.npmjs.com/package/dsh-boot-animation-male)（当前 1.0.2）。
 
 ## 使用
 
